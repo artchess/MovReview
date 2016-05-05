@@ -5,6 +5,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MovieReview.Data.SampleData;
 using MovieReview.Model;
 
 namespace MovieReview.Data
