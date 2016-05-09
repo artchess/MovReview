@@ -17,7 +17,8 @@ namespace MovieReview.Web.Controllers
         [ActionName("movies")]
         public IEnumerable<Movie> GetMovies()
         {
-            return Uow.Movies.GetAll().OrderBy(m => m.Id);
+            var res =  Uow.Movies.GetAll().OrderBy(m => m.Id);
+            return res;
         }
 
         // GET: api/lookups/movieReviews
