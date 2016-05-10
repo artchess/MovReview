@@ -285,6 +285,7 @@
     <Content Include="images\site-logo-white-70pct.png" />
     <Content Include="images\site-logo-white.png" />
     <Content Include="images\snowboarder.jpg" />
+    <Content Include="js\homeindex.js" />
     <Content Include="Scripts\angular-ui-bootstrap.js" />
     <Content Include="Scripts\cbpAnimatedHeader.js" />
     <Content Include="Scripts\classie.js" />
