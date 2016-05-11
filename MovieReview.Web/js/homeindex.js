@@ -48,3 +48,50 @@ module.controller('homeIndexController', ['$scope', '$http', function ($scope, $
     }, 100);
 
 }]);
+
+module.controller('newMovieController', ["$scope", "$http", "$window", function ($scope, $http, $window) {
+
+    $scope.newMovie = {};
+
+    $scope.save = function () {
+
+        $http.post('/api/movies', $scope.newMovie)
+                .then(function (result) {
+                    //success
+                    var newMovie = result.data;
+                    toastr.success("Pelicula <b>Salvada</b> Correctamente");
+
+                    //Una vez salvado regreso a la pagina de movies
+                    $window.location = '#/movies';
+                },
+                function () {
+                    //Error
+                    toastr.error('No fue posible salvar la pelicula', 'Error');
+                });
+
+    }
+
+    //$scope.cancelMovie = function () {
+    //    $window.location = "#/movies";
+    //}
+
+    //Timeout function to show spinner
+    //setTimeout(function () {
+    //    $scope.save = function () {
+    //        //Making Spinner On
+    //        $('#loader').show();
+    //        dataService.addMovie($scope.newMovie)
+    //            .then(function () {
+    //                //success
+    //                toastr.success("Data Saved Successfully");
+    //                $window.location = "#/movies";
+    //            }, function () {
+    //                //Error
+    //                toastr.error("Error in Saving Data");
+    //            }).then(function () {
+    //                //Hide the progressbar in any case
+    //                $('#loader').hide();
+    //            });
+    //    }
+    //}, 1000);
+}]);

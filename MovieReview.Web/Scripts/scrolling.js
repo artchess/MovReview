@@ -13,11 +13,12 @@ $(function () {
     // smooth scrolling
     $('nav a, .down-button a').bind('click', function (event) {
         var isDownBtn = $(this).parent().hasClass('down-button');
-        $('html, body').stop().animate({
-            scrollTop: $($(this).data('go')).offset().top - 100
-        }, !isDownBtn ? 900 : 1200, 'easeInOutExpo');
-        if (isDownBtn)
+        if (isDownBtn) {
+            $('html, body').stop().animate({
+                scrollTop: $($(this).data('go')).offset().top - 100
+            }, !isDownBtn ? 900 : 1200, 'easeInOutExpo');
             event.preventDefault();
+        }   
     });
 
     // parallax scrolling with stellar.js
