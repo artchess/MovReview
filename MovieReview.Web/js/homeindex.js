@@ -1,37 +1,30 @@
 ﻿
-var app = angular.module("app", []);
+var module = angular.module("homeIndex", ['ngRoute']);
 
-app.controller('homeIndexController', function ($scope, $http) {
-    //$scope.data = [
-    //    {
-    //        MovieName: "Avatar",
-    //        DirectorName: "James Cameron",
-    //        ReleaseYear: "2009",
-    //        Reviews: "3"
-    //    },
-    //    {
-    //        MovieName: "Titanic",
-    //        DirectorName: "James Cameron",
-    //        ReleaseYear: "1997",
-    //        Reviews: "30"
-    //    },
-    //    {
-    //        MovieName: "Die another day",
-    //        DirectorName: "Lee Tamahori",
-    //        ReleaseYear: "2002",
-    //        Reviews: "10"
-    //    },
-    //    {
-    //        MovieName: "Godzilla",
-    //        DirectorName: "Gareth Edwards",
-    //        ReleaseYear: "2014",
-    //        Reviews: "40"
-    //    }
-    //];
+//Route Configuration
+module.config(["$routeProvider", function ($routeProvider) {
+    $routeProvider.when("/", {
+        controller: "homeIndexController",
+        templateUrl: "/templates/home.html"
+    });
+
+    $routeProvider.when("/movies", {
+        controller: "homeIndexController",
+        templateUrl: "/templates/movies.html"
+    });
+
+    $routeProvider.when("/newMovie", {
+        controller: "newMovieController",
+        templateUrl: "/templates/newMovie.html"
+    });
+
+    //default
+    $routeProvider.otherwise({ redirectTo: "/" });
+}]);
+
+module.controller('homeIndexController', ['$scope', '$http', function ($scope, $http) {
 
     $("#loader").show();
-
-    $scope.count = 0;
 
     //Vacio colleccion
     $scope.data = [];
@@ -52,6 +45,6 @@ app.controller('homeIndexController', function ($scope, $http) {
             .then(function () {
                 $('#loader').hide();
             });
-    }, 1000);
+    }, 100);
 
-});
+}]);

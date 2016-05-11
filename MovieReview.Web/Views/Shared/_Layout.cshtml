@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app="app">
+<html lang="en" ng-app="@ViewBag.InitModule">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -33,11 +33,11 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#/">Home</a></li>
-                        <li><a href="#/movies">Movies</a></li>
-                        <li><a href="#/aboutapp">About APP</a></li>
+                        <li><a href="#/" data-go="#sights">Home</a></li>
+                        <li><a href="#/movies" data-go="#sights">Movies</a></li>
+                        <li><a href="#/aboutapp" data-go="#sights">About APP</a></li>
                         <!--<li><a href="#activities">Activities</a></li>-->
-                        <li><a href="#/contactme">Contact Me</a></li>
+                        <li><a href="#/contactme" data-go="#sights">Contact Me</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -53,8 +53,8 @@
                  style="background-image: url(../../images/movie-background.jpg); height: 550px; background-size:cover"
                  data-stellar-background-ratio="0.2">
                 <div class="down-button">
-                    <a class="btn" href="#sights">
-                        <i class="fa fa-arrow-circle-down fa-3x" style="color: black" ></i>
+                    <a class="btn" style="background-color:white;" href="#sights" data-go="#sights">
+                        <i class="fa fa-arrow-circle-down fa-3x" style="color: black"></i>
                     </a>
                 </div>
             </div>
@@ -73,7 +73,7 @@
         <div class="row">
             <div id="copyright">
 
-                &copy; <a href="http://artchess.azurewebsites.net"> My Vista </a> Todos los derechos reservados
+                &copy; <a href="http://artchess.azurewebsites.net"> Blog </a> Todos los derechos reservados
 
             </div>
         </div>
@@ -87,8 +87,8 @@
     <script src="~/Scripts/jquery.stellar.js"></script>
     <script src="~/Scripts/scrolling.js"></script>
     <script src="~/Scripts/angular.min.js"></script>
-    @*<script src="~/Scripts/angular-route.min.js"></script>
-    <script src="~/Scripts/ui-bootstrap-tpls.min.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
+    @*<script src="~/Scripts/ui-bootstrap-tpls.min.js"></script>
     <script src="~/Scripts/toastr.js"></script>
     <script src="~/Scripts/ui-bootstrap-tpls-0.3.0.min.js"></script>*@
 

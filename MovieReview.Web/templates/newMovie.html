@@ -1,0 +1,31 @@
+﻿<form class="form-horizontal" name="newMovieForm" novalidate role="form">
+    <fieldset>
+        <legend>Enter New Movie</legend>
+        <div class="form-group">
+            <label for="MovieName" class="col-sm-3 control-label">Movie Name</label>
+            <div class="col-sm-9">
+                <input type="text" id="MovieName" name="MovieName" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="DirectorName" class="col-sm-3 control-label">Director Name</label>
+            <div class="col-sm-9">
+                <input type="text" id="DirectorName" name="DirectorName" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="ReleaseYear" class="col-sm-3 control-label">Release Year</label>
+            <div class="col-sm-9">
+                <input type="text" id="ReleaseYear" name="ReleaseYear" class="form-control" />
+            </div>
+        </div>
+        <div class="container">
+            <button type="button" id="addNewMovie" value="addNewMovie">
+                <i class="fa fa-plus btn btn-primary"> Add Movie</i>
+            </button>
+            <button type="button" id="cancelMovie" value="cancelMovie">
+                <i class="fa fa-undo btn btn-link"> Cancel</i>
+            </button>
+        </div>
+    </fieldset>
+</form>
