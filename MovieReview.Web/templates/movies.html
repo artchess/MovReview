@@ -3,8 +3,8 @@
 <div>
     <div class="row">
         <div class="container">
-            <a type="button" id="addMovie" href="#/newMovie" value="addMovie">
-                <i class="fa fa-plus btn btn-link">
+            <a type="button" class="btn btn-default" id="addMovie" href="#/newMovie" value="addMovie">
+                <i class="fa fa-plus">
                     Add Movie
                 </i>
             </a>
@@ -36,11 +36,13 @@
                                     <th>
                                         Edit
                                     </th>
-                                    <th>Reviews</th>
+                                    <th>
+                                        Reviews
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr data-ng-repeat="i in data">
+                                <tr data-ng-repeat="i in data.movies">
                                     <td>
                                         {{i.MovieName}}
                                     </td>

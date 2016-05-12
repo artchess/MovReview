@@ -286,6 +286,7 @@
     <Content Include="images\site-logo-white.png" />
     <Content Include="images\snowboarder.jpg" />
     <Content Include="js\homeindex.js" />
+    <Content Include="js\movie-review-edit.js" />
     <Content Include="Scripts\angular-ui-bootstrap.js" />
     <Content Include="Scripts\cbpAnimatedHeader.js" />
     <Content Include="Scripts\classie.js" />
@@ -296,6 +297,7 @@
     <Content Include="Scripts\ui-bootstrap-tpls-0.3.0.min.js" />
     <Content Include="Scripts\ui-bootstrap-tpls.js" />
     <Content Include="Scripts\ui-bootstrap-tpls.min.js" />
+    <Content Include="templates\editMovie.html" />
     <Content Include="templates\home.html" />
     <Content Include="templates\movies.html" />
     <Content Include="templates\newMovie.html" />
