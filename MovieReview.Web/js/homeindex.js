@@ -18,6 +18,21 @@ module.config(["$routeProvider", function ($routeProvider) {
         templateUrl: "/templates/newMovie.html"
     });
 
+    $routeProvider.when("/reviews/:Id", {
+        controller: "reviewsController",
+        templateUrl: "/templates/reviews.html"
+    });
+
+    $routeProvider.when("/newReview/:Id", {
+        controller: "newreviewController",
+        templateUrl: "/templates/newReview.html"
+    });
+
+    $routeProvider.when("/editReview/:Id", {
+        controller: "revieweditController",
+        templateUrl: "/templates/editReview.html"
+    });
+
     //default
     $routeProvider.otherwise({ redirectTo: "/" });
 }]);
@@ -94,12 +109,110 @@ module.factory('movieService', ['$http', '$q', function ($http, $q) {
         return deferred.promise;
     }
 
+    // obtención de críticas
+    var _getReviews = function (Id) {
+        var deferred = $q.defer();
+        $http.get('/api/MovieReviews/' + Id)
+            .then(function (result) {
+                //Success
+                deferred.resolve(result.data);
+            }, function () {
+                //Error
+                deferred.reject();
+            });
+
+        return deferred.promise;
+    }
+
+    // obtencion de críticas por id
+    var _getReviewsById = function (Id) {
+        var deferred = $q.defer();
+        _getReviews(Id)
+            .then(function (reviews) {
+                //success
+                if (reviews)
+                    deferred.resolve(reviews);
+                else
+                    deferred.reject();
+            }, function () {
+                //Error
+                deferred.reject();
+            });
+
+        return deferred.promise;
+    }
+
+    // agregar nueva crítica
+    var _addReview = function (MovieId, newReview) {
+        var deferred = $q.defer();
+        $http.post('/api/MovieReviews/' + MovieId, newReview)
+            .then(function () {
+                //success
+                deferred.resolve();
+            }, function () {
+                //error
+                deferred.reject();
+            })
+
+        return deferred.promise;
+    }
+
+    //Obten crítica por id
+    var _getReviewByReviewerId = function (Id) {
+        var deferred = $q.defer();
+        $http.get('/api/Lookups/getbyreviewerid?Id=' + Id)
+            .then(function (result) {
+                //success
+                deferred.resolve(result.data);
+            }, function () {
+                //error
+                deferred.reject();
+            });
+        return deferred.promise;
+    };
+
+    //actualizar crítica
+    //Updating Review
+    var _updateReview = function (newReview) {
+        var deferred = $q.defer();
+        $http.put('/api/MovieReviews/', newReview)
+            .then(function () {
+                //Success
+                deferred.resolve();
+            }, function () {
+                deferred.reject();
+            });
+        return deferred.promise;
+    };
+
+    //Deleting the Review
+    var _removeReview = function (Id) {
+        var deferred = $q.defer();
+
+        $http.delete('/api/MovieReviews/' + Id)
+            .then(function () {
+                //success
+                deferred.resolve();
+            },
+            function () {
+                //error
+                deferred.reject();
+            });
+        return deferred.promise;
+    }
+
     //habilito el uso de las siguientes propiedades para que otras partes de angular lo puedan usar
     return {
         getMovies: _getMovies,
         getMovieById: _getMovieById,
         movieEdit: _movieEdit,
-        removeMovie: _removeMovie
+        removeMovie: _removeMovie,
+        getReviews: _getReviews,
+        getReviewsById: _getReviewsById,
+        addReview: _addReview,
+        getReviewByReviewerId: _getReviewByReviewerId,
+        updateReview: _updateReview,
+        removeReview: _removeReview
     };
 }]);
 
@@ -183,37 +296,107 @@ module.controller('reviewsController', ["$scope", "$routeParams", "$window", "mo
         //$scope.goToAddReview = function () {
         //    $window.location = "/#newReview/" + $routeParams.Id;
         //}
-        ////Setting Timeout for spinner
-        //$('#loader').show();
-        ////Timeout function to show spinner
-        //setTimeout(function () {
-        //    dataService.getReviewById($routeParams.Id)
-        //        .then(function (review) {
-        //            //Success
-        //            //For pagination
-        //            $scope.currentPage = 1;
-        //            $scope.numPerPage = 10;
-        //            $scope.maxSize = 11;
 
-        //            $scope.numPages = function () {
-        //                return Math.ceil(review.length / $scope.numPerPage);
-        //            };
+        //Setting Timeout for spinner
+        $('#loader').show();
+        //Timeout function to show spinner
+        
+        setTimeout(function () {
+            movieService.getReviewsById($routeParams.Id)
+                .then(function (review) {
+                    //Success
+                    //Para paginación
+                    $scope.currentPage = 1;
+                    $scope.numPerPage = 4;
+                    $scope.maxSize = 5;
 
-        //            $scope.$watch('currentPage + numPerPage', function () {
-        //                var begin = (($scope.currentPage - 1) * $scope.numPerPage)
-        //                , end = begin + $scope.numPerPage;
-        //                $scope.filteredReviews = review.slice(begin, end);
+                    $scope.numPages = function () {
+                        return Math.ceil(review.length / $scope.numPerPage);
+                    };
 
-        //            });
-        //            $scope.reviews = review;
-        //            $scope.MovieId = $routeParams.Id;
-        //            toastr.success("Reviews retrieved Successfully");
-        //        }, function () {
-        //            //Error
-        //            toastr.error("Error in Fetching Reviews");
-        //        })
-        //        .then(function () {
-        //            $('#loader').hide();
-        //        });
-        //}, 1000);
+                    $scope.$watch('currentPage + numPerPage', function () {
+                        var begin = (($scope.currentPage - 1) * $scope.numPerPage), end = begin + $scope.numPerPage;
+                        $scope.filteredReviews = review.slice(begin, end);
+
+                    });
+                    $scope.reviews = review;
+                    $scope.MovieId = $routeParams.Id;
+                    toastr.success("Críticas obtenidas satisfactoriamente");
+                }, function () {
+                    //Error
+                    toastr.error("Error al obtener críticas");
+                })
+                .then(function () {
+                    $('#loader').hide();
+                });
+        }, 100);
 }]);
+
+module.controller('newreviewController', ["$scope", "$routeParams", "$window", "movieService", function ($scope, $routeParams, $window, movieService) {
+
+    $scope.ReviewerRating = 3;
+    $scope.max = 5;
+    $scope.isReadonly = false;
+    $scope.MovieId = null;
+    $scope.newReview = {};
+
+    $scope.cancelReview = function () {
+        $window.history.back();
+    }
+
+    $scope.saveReview = function () {
+        movieService.addReview($routeParams.Id, $scope.newReview)
+                    .then(function () {
+                        //success
+                        toastr.success("Gracias por tu feedback!");
+                        $window.location = "#/reviews/" + $routeParams.Id;
+                    }, function () {
+                        //error
+                        toastr.error("No se pudo guardar la nueva crítica");
+                    });
+    }
+
+}]);
+
+module.controller('revieweditController', ["$scope", "$routeParams", "$window", "movieService", function ($scope, $routeParams, $window, movieService) {
+
+    $scope.review = null;
+    $scope.newReview = {};
+
+    movieService.getReviewByReviewerId($routeParams.Id)
+        .then(function (result) {
+            $scope.review = result;
+        }, function () {
+            toastr.error('No se pudo obtener la crítica.');
+        });
+
+    $scope.cancelReview = function () {
+        $window.history.back();
+    }
+
+    //Editando la crítica 
+    $scope.editReview = function () {
+        movieService.updateReview($scope.review)
+            .then(function () {
+                //success
+                toastr.success('Crítica editada satisfactoriamente');
+                $window.location = '#/movies';
+            }, function () {
+                toastr.error('Error al editar la crítica');
+            })
+    };
+
+    //Eliminando la cítica
+    $scope.deleteReview = function () {
+        movieService.removeReview($scope.review.Id)
+            .then(function () {
+                //success
+                toastr.success('Crítica eliminada satisfactoriamente');
+                $window.location = '#/movies';
+            }, function () {
+                //error
+                toastr.error('Error al eliminar la crítica con el Id:' + $scope.review.Id);
+            })
+    };
+
+}])

@@ -298,9 +298,12 @@
     <Content Include="Scripts\ui-bootstrap-tpls.js" />
     <Content Include="Scripts\ui-bootstrap-tpls.min.js" />
     <Content Include="templates\editMovie.html" />
+    <Content Include="templates\editReview.html" />
     <Content Include="templates\home.html" />
     <Content Include="templates\movies.html" />
     <Content Include="templates\newMovie.html" />
+    <Content Include="templates\newReview.html" />
+    <Content Include="templates\reviews.html" />
     <Content Include="Web API Tests\MovieAPI.js" />
     <Content Include="Web API Tests\MoviesAPI.html" />
     <Content Include="Web API Tests\qunit-utils.js" />
