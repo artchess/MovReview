@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieReview.Model", "MovieR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieReview.Data.Contracts", "MovieReview.Data.Contracts\MovieReview.Data.Contracts.csproj", "{DC0F564B-F54A-4A18-9A07-FCBB3105BC90}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieReview.Tests", "MovieReview.Tests\MovieReview.Tests.csproj", "{384811EE-12BA-4418-B1ED-C0A679EFBC82}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{DC0F564B-F54A-4A18-9A07-FCBB3105BC90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC0F564B-F54A-4A18-9A07-FCBB3105BC90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC0F564B-F54A-4A18-9A07-FCBB3105BC90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{384811EE-12BA-4418-B1ED-C0A679EFBC82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{384811EE-12BA-4418-B1ED-C0A679EFBC82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{384811EE-12BA-4418-B1ED-C0A679EFBC82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{384811EE-12BA-4418-B1ED-C0A679EFBC82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
