@@ -285,6 +285,7 @@
     <Content Include="images\site-logo-white-70pct.png" />
     <Content Include="images\site-logo-white.png" />
     <Content Include="images\snowboarder.jpg" />
+    <Content Include="js\appJSTest.js" />
     <Content Include="js\homeindex.js" />
     <Content Include="js\movie-review-edit.js" />
     <Content Include="Scripts\angular-ui-bootstrap.js" />
@@ -1186,6 +1187,9 @@
       <Project>{83273922-a7a7-4d28-b5f8-aa601c2fa558}</Project>
       <Name>MovieReview.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
