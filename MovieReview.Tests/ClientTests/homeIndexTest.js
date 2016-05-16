@@ -1,4 +1,5 @@
 ﻿/// <reference path="../scripts/jasmine.js" />
+/// <reference path="../../moviereview.web/scripts/jquery-1.10.2.min.js" />
 /// <reference path="../../moviereview.web/scripts/angular.min.js" />
 /// <reference path="../../moviereview.web/scripts/ui-bootstrap-tpls-0.3.0.min.js" />
 /// <reference path="../../moviereview.web/scripts/angular-route.min.js" />
@@ -85,5 +86,25 @@ describe("home-Index Tests -->", function () {
 
     });
 
+    describe("Testing Home-Index Controller-->", function () {
+
+        it("Load Movies", inject(function ($controller, $http, movieService) {
+
+            var scopeObj = {};
+
+            $httpBackend.expectGET(url);
+
+            var ctrl = $controller("homeIndexController", {
+                $scope: scopeObj,
+                $http: $http,
+                movieService: movieService
+            });
+
+            movieService.getMovies();
+            $httpBackend.flush();
+            expect(ctrl).not.toBeNull();
+            expect(scopeObj.data).toBeDefined();
+        }));
+    });
 
 });

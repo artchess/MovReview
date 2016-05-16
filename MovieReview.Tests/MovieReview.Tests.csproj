@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClientTests\homeIndexTest.js" />
+    <Content Include="ClientTests\movieReviewTest.js" />
     <Content Include="ClientTests\myAppTest.js" />
     <Content Include="css\jasmine.css" />
     <Content Include="Scripts\jasmine-html.js" />
