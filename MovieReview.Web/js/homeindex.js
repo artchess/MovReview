@@ -1,8 +1,8 @@
 ﻿
-var module = angular.module("homeIndex", ['ngRoute', 'ui.bootstrap', 'movieReviewEdit']);
+var homeIndexModule = angular.module("homeIndex", ['ngRoute', 'ui.bootstrap', 'movieReviewEdit']);
 
 //Route Configuration
-module.config(["$routeProvider", function ($routeProvider) {
+homeIndexModule.config(["$routeProvider", function ($routeProvider) {
     $routeProvider.when("/", {
         controller: "homeIndexController",
         templateUrl: "/templates/home.html"
@@ -41,7 +41,9 @@ module.config(["$routeProvider", function ($routeProvider) {
 // $q es un parametro especial que nos permite crear un objeto deferrable
 // un objeto deferrable puede exponer una promesa, de modo que el consumidor de la función _getMovies
 // pueda usarla como sintaxis de lo que es necesario hacer cuando es satisfactorio o hubo algun fallo.
-module.factory('movieService', ['$http', '$q', function ($http, $q) {
+homeIndexModule.factory('movieService', ['$http', '$q', function ($http, $q) {
+    var _movies = [];
+    var _reviews = [];
 
     //Funcion para traer peliculas
     var _getMovies = function () {
@@ -52,6 +54,8 @@ module.factory('movieService', ['$http', '$q', function ($http, $q) {
         $http.get('/api/movies')
             .then(function (result) {
                 //success
+                //angular.copy copies the collection from source to destination
+                angular.copy(result.data, _movies);
                 deferred.resolve(result.data);
             }, function () {
                 //Error
@@ -115,6 +119,7 @@ module.factory('movieService', ['$http', '$q', function ($http, $q) {
         $http.get('/api/MovieReviews/' + Id)
             .then(function (result) {
                 //Success
+                angular.copy(result.data, _reviews);
                 deferred.resolve(result.data);
             }, function () {
                 //Error
@@ -203,6 +208,8 @@ module.factory('movieService', ['$http', '$q', function ($http, $q) {
 
     //habilito el uso de las siguientes propiedades para que otras partes de angular lo puedan usar
     return {
+        movies: _movies,
+        reviews: _reviews,
         getMovies: _getMovies,
         getMovieById: _getMovieById,
         movieEdit: _movieEdit,
@@ -216,7 +223,7 @@ module.factory('movieService', ['$http', '$q', function ($http, $q) {
     };
 }]);
 
-module.controller('homeIndexController', ['$scope', '$http', 'movieService', function ($scope, $http, movieService) {
+homeIndexModule.controller('homeIndexController', ['$scope', '$http', 'movieService', function ($scope, $http, movieService) {
     //Coleccion vacía
     $scope.data = {};
     $scope.data.movies = [];
@@ -241,7 +248,7 @@ module.controller('homeIndexController', ['$scope', '$http', 'movieService', fun
     }, 10);
 }]);
 
-module.controller('newMovieController', ["$scope", "$http", "$window", function ($scope, $http, $window) {
+homeIndexModule.controller('newMovieController', ["$scope", "$http", "$window", function ($scope, $http, $window) {
 
     $scope.newMovie = {};
 
@@ -288,7 +295,7 @@ module.controller('newMovieController', ["$scope", "$http", "$window", function 
     //}, 1000);
 }]);
 
-module.controller('reviewsController', ["$scope", "$routeParams", "$window", "movieService", function ($scope, $routeParams, $window, movieService) {
+homeIndexModule.controller('reviewsController', ["$scope", "$routeParams", "$window", "movieService", function ($scope, $routeParams, $window, movieService) {
 
         $scope.reviews = null;
         $scope.MovieId = null;
@@ -332,7 +339,7 @@ module.controller('reviewsController', ["$scope", "$routeParams", "$window", "mo
         }, 100);
 }]);
 
-module.controller('newreviewController', ["$scope", "$routeParams", "$window", "movieService", function ($scope, $routeParams, $window, movieService) {
+homeIndexModule.controller('newreviewController', ["$scope", "$routeParams", "$window", "movieService", function ($scope, $routeParams, $window, movieService) {
 
     $scope.ReviewerRating = 3;
     $scope.max = 5;
@@ -358,7 +365,7 @@ module.controller('newreviewController', ["$scope", "$routeParams", "$window", "
 
 }]);
 
-module.controller('revieweditController', ["$scope", "$routeParams", "$window", "movieService", function ($scope, $routeParams, $window, movieService) {
+homeIndexModule.controller('revieweditController', ["$scope", "$routeParams", "$window", "movieService", function ($scope, $routeParams, $window, movieService) {
 
     $scope.review = null;
     $scope.newReview = {};

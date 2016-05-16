@@ -1,9 +1,9 @@
 ﻿
 //Defined Module
-var module = angular.module('movieReviewEdit', []);
+var movieReviewModule = angular.module('movieReviewEdit', []);
 
 //Rutas Definidas
-module.config(['$routeProvider', function ($routeProvider) {
+movieReviewModule.config(['$routeProvider', function ($routeProvider) {
 
     $routeProvider.when('/editMovie/:Id', {
         controller: 'movieEditController',
@@ -16,7 +16,7 @@ module.config(['$routeProvider', function ($routeProvider) {
 
 }]);
 
-module.controller('movieEditController', ['$scope', 'movieService', '$window', '$routeParams', function ($scope, movieService, $window, $routeParams) {
+movieReviewModule.controller('movieEditController', ['$scope', 'movieService', '$window', '$routeParams', function ($scope, movieService, $window, $routeParams) {
     //inicializo movie y movie id
     $scope.movie = null;
     $scope.MovieId = null;
